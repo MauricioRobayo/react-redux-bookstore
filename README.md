@@ -1,3 +1,12 @@
+## React-Redux Bookstore
+
+Simple bookstore management tool with React and Redux.
+
+- [Project description](https://github.com/microverseinc/project-redux-bookstore/).
+- [Live version](https://fathomless-refuge-54226.herokuapp.com/).
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
