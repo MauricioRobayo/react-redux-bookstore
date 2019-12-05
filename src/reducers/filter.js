@@ -1,6 +1,6 @@
 const filter = (state = 'All', { type, filter }) => {
   switch (type) {
-    case 'CREATE_FILTER':
+    case 'CHANGE_FILTER':
       return filter
     default:
       return state
