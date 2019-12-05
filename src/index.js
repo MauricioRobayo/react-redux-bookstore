@@ -30,7 +30,7 @@ const books = [
   },
 ]
 
-const store = createStore(reducers, { books })
+const store = createStore(reducers, { books, filter: 'All' })
 
 ReactDOM.render(
   <Provider store={store}>
