@@ -42,6 +42,13 @@ class BooksForm extends Component {
     event.target.reset()
   }
 
+  renderBooks = () =>
+    bookCategories.map(category => (
+      <option key={category} value={category}>
+        {category}
+      </option>
+    ))
+
   render() {
     const { title, category } = this.state
     return (
@@ -64,11 +71,7 @@ class BooksForm extends Component {
             value={category}
             onChange={this.handleChange}
           >
-            {bookCategories.map(category => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
+            {this.renderBooks()}
           </select>
         </label>
         <input type="submit" />
