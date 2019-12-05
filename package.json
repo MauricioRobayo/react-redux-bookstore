@@ -45,7 +45,7 @@
     "prettier": "^1.19.1"
   },
   "prettier": {
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "trailingComma": "all"
   },
