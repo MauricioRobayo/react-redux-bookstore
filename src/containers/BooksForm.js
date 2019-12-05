@@ -3,16 +3,7 @@ import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 import { connect } from 'react-redux'
 import { createBook } from '../actions'
-
-const bookCategories = [
-  'Action',
-  'Biography',
-  'History',
-  'Horror',
-  'Kids',
-  'Learning',
-  'Sci-Fi',
-]
+import bookCategories from '../config'
 
 class BooksForm extends Component {
   constructor(props) {
