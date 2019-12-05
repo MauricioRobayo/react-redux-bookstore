@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import uniqid from 'uniqid'
 import { connect } from 'react-redux'
+import { createBook } from '../actions'
 
 const bookCategories = [
   'Action',
@@ -11,26 +14,75 @@ const bookCategories = [
   'Sci-Fi',
 ]
 
-const BooksForm = () => {
-  return (
-    <form>
-      <label htmlFor="title">
-        Title:
-        <input type="text" name="title" id="title" />
-      </label>
-      <label htmlFor="category">
-        Category:
-        <select name="category" id="category">
-          {bookCategories.map(category => (
-            <option key={`book-category-${category}`} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-      </label>
-      <input type="submit" />
-    </form>
-  )
+class BooksForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      title: '',
+      category: '',
+    }
+  }
+
+  handleChange = event => {
+    const { name, value } = event.target
+    this.setState({
+      [name]: value,
+    })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    const { title, category } = this.state
+    const { createBook } = this.props
+    createBook({
+      id: uniqid(),
+      title,
+      category,
+    })
+    event.target.reset()
+  }
+
+  render() {
+    const { title, category } = this.state
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label htmlFor="title">
+          Title:
+          <input
+            type="text"
+            name="title"
+            id="title"
+            value={title}
+            onChange={this.handleChange}
+          />
+        </label>
+        <label htmlFor="category">
+          Category:
+          <select
+            name="category"
+            id="category"
+            value={category}
+            onChange={this.handleChange}
+          >
+            {bookCategories.map(category => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </label>
+        <input type="submit" />
+      </form>
+    )
+  }
 }
 
-export default connect()(BooksForm)
+const mapDispatchToProps = dispatch => ({
+  createBook: book => dispatch(createBook(book)),
+})
+
+BooksForm.propTypes = {
+  createBook: PropTypes.func.isRequired,
+}
+
+export default connect(null, mapDispatchToProps)(BooksForm)
