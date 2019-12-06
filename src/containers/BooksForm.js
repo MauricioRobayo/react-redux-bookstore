@@ -39,6 +39,10 @@ class BooksForm extends Component {
       title,
       category,
     })
+    this.setState({
+      title: '',
+      category: bookCategories[0],
+    })
     event.target.reset()
   }
 
