@@ -3,7 +3,7 @@
 Simple bookstore management tool with React and Redux.
 
 - [Project description](https://github.com/microverseinc/project-redux-bookstore/).
-- [Live version](https://floating-reef-28181.herokuapp.com//).
+- [Live version](https://floating-reef-28181.herokuapp.com/).
 
 ---
 
