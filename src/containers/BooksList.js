@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Book from '../components/Book'
 import { removeBook, changeFilter } from '../actions'
 import CategoryFilter from '../components/CategoryFilter'
+import Header from '../components/Header'
 
 class BooksList extends Component {
   handleRemoveBook = book => {
@@ -19,21 +20,25 @@ class BooksList extends Component {
   render() {
     const { books, filter } = this.props
     return (
-      <div className="BookList">
-        <CategoryFilter
-          filter={filter}
-          handleFilterChange={this.handleFilterChange}
-        />
-        {books
-          .filter(book => filter === book.category || filter === 'All')
-          .map(book => (
-            <Book
-              key={book.id}
-              book={book}
-              handleRemoveBook={this.handleRemoveBook}
-            />
-          ))}
-      </div>
+      <>
+        <Header>
+          <CategoryFilter
+            filter={filter}
+            handleFilterChange={this.handleFilterChange}
+          />
+        </Header>
+        <div className="BookList">
+          {books
+            .filter(book => filter === book.category || filter === 'All')
+            .map(book => (
+              <Book
+                key={book.id}
+                book={book}
+                handleRemoveBook={this.handleRemoveBook}
+              />
+            ))}
+        </div>
+      </>
     )
   }
 }
