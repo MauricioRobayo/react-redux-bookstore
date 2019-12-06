@@ -3,16 +3,7 @@ import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 import { connect } from 'react-redux'
 import { createBook } from '../actions'
-
-const bookCategories = [
-  'Action',
-  'Biography',
-  'History',
-  'Horror',
-  'Kids',
-  'Learning',
-  'Sci-Fi',
-]
+import bookCategories from '../config'
 
 class BooksForm extends Component {
   constructor(props) {
@@ -46,7 +37,7 @@ class BooksForm extends Component {
     event.target.reset()
   }
 
-  renderBooks = () =>
+  renderCategories = () =>
     bookCategories.map(category => (
       <option key={category} value={category}>
         {category}
@@ -75,7 +66,7 @@ class BooksForm extends Component {
             value={category}
             onChange={this.handleChange}
           >
-            {this.renderBooks()}
+            {this.renderCategories()}
           </select>
         </label>
         <input type="submit" />
