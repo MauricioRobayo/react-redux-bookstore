@@ -1,4 +1,7 @@
 html {
+  --color: hsl(0, 0%, 10%);
+  --color-light: hsl(0, 0%, 50%);
+  --color-lighter: hsl(0, 0%, 70%);
   --primary-color: #0290ff;
   --background-color: #f5f6fa;
   --border-color: #e8e8e8;
@@ -8,6 +11,7 @@ body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   background-color: var(--background-color);
+  color: var(--color);
 }
 header {
   background-color: #fff;
@@ -18,8 +22,9 @@ nav {
   display: flex;
 }
 nav,
-.BookList {
-  max-width: 1400px;
+.BookList,
+form {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
 }
@@ -28,9 +33,47 @@ header h1 {
   margin: 0.5rem 0;
 }
 
+form {
+  margin: 0.5rem 1rem;
+  padding: 0.5rem 0;
+  border-top: 2px solid var(--border-color);
+}
+
+h4 {
+  color: var(--color-light);
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+select,
+input {
+  border-radius: 4px;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+}
+form input,
+form select {
+  margin-bottom: 0.5rem;
+  flex-grow: 1;
+}
+select.inactive,
+input::placeholder {
+  color: var(--color-lighter);
+}
+form div {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+form button {
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+}
 .Book {
   text-align: left;
-  max-width: 1200px;
   border-radius: 4px;
   border: 1px solid var(--border-color);
   background-color: #ffffff;
@@ -41,14 +84,14 @@ header h1 {
 .Book-category {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
-  opacity: 0.5;
+  color: var(--color-light);
 }
 .Book-title {
   margin: 0.25rem 0 0 0;
 }
 .Book-id {
   text-transform: uppercase;
-  opacity: 0.5;
+  color: var(--color-light);
   font-size: 0.85rem;
 }
 .Book-id:before {
@@ -62,4 +105,15 @@ header h1 {
   padding: 0;
   margin-top: 1rem;
   cursor: pointer;
+}
+@media screen and (min-width: 620px) {
+  form div {
+    flex-direction: row;
+    align-items: baseline;
+  }
+  form input,
+  form select {
+    margin-right: 1rem;
+    flex-grow: 1;
+  }
 }

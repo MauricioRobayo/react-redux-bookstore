@@ -10,7 +10,7 @@ class BooksForm extends Component {
     super(props)
     this.state = {
       title: '',
-      category: bookCategories[0],
+      category: 'Category',
     }
   }
 
@@ -32,14 +32,19 @@ class BooksForm extends Component {
     })
     this.setState({
       title: '',
-      category: bookCategories[0],
+      category: 'Categories',
     })
     event.target.reset()
   }
 
   renderCategories = () =>
-    bookCategories.map(category => (
-      <option key={category} value={category}>
+    ['Category', ...bookCategories].map(category => (
+      <option
+        disabled={category === 'Category'}
+        hidden={category === 'Category'}
+        key={category}
+        value={category}
+      >
         {category}
       </option>
     ))
@@ -48,28 +53,29 @@ class BooksForm extends Component {
     const { title, category } = this.state
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="title">
-          Title:
+        <h4>Add new book</h4>
+        <div>
           <input
             type="text"
             name="title"
             id="title"
+            placeholder="Book title"
             value={title}
             onChange={this.handleChange}
           />
-        </label>
-        <label htmlFor="category">
-          Category:
           <select
             name="category"
             id="category"
             value={category}
             onChange={this.handleChange}
+            className={category === 'Category' ? 'inactive' : ''}
           >
             {this.renderCategories()}
           </select>
-        </label>
-        <input type="submit" />
+          <button type="submit" value="">
+            Add book
+          </button>
+        </div>
       </form>
     )
   }
