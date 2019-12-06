@@ -26,6 +26,9 @@ header {
     font-weight: bold;
     margin: 0.5rem 0;
   }
+  select {
+    margin-left: 1rem;
+  }
 }
 nav,
 .BookList,
@@ -33,6 +36,12 @@ form {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
+}
+select, input {
+  border-radius: 4px;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  margin-bottom: 0.5rem;
 }
 form {
   margin: 0.5rem auto 2rem auto;
@@ -46,14 +55,9 @@ form {
   }
   input,
   select {
-    border-radius: 4px;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    margin-bottom: 0.5rem;
     flex-grow: 1;
     @media screen and (min-width: 620px) {
       margin-right: 1rem;
-      flex-grow: 1;
     }
   }
   select.inactive,
