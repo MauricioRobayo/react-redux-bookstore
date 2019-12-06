@@ -16,39 +16,24 @@ class BooksList extends Component {
     changeFilter(filter)
   }
 
-  renderBooks = () => {
-    const { books, filter } = this.props
-    return books
-      .filter(book => filter === book.category || filter === 'All')
-      .map(book => (
-        <Book
-          key={book.id}
-          book={book}
-          handleRemoveBook={this.handleRemoveBook}
-        />
-      ))
-  }
-
   render() {
-    const { filter } = this.props
+    const { books, filter } = this.props
     return (
-      <>
+      <div className="BookList">
         <CategoryFilter
           filter={filter}
           handleFilterChange={this.handleFilterChange}
         />
-        <table className="BooksList">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Category</th>
-              <th>Remove</th>
-            </tr>
-          </thead>
-          <tbody>{this.renderBooks()}</tbody>
-        </table>
-      </>
+        {books
+          .filter(book => filter === book.category || filter === 'All')
+          .map(book => (
+            <Book
+              key={book.id}
+              book={book}
+              handleRemoveBook={this.handleRemoveBook}
+            />
+          ))}
+      </div>
     )
   }
 }
