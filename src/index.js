@@ -5,7 +5,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
 import App from './components/App'
-import './index.css'
+import './index.scss'
 
 const books = [
   {
