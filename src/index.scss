@@ -1,0 +1,118 @@
+html {
+  --color: hsl(0, 0%, 10%);
+  --color-light: hsl(0, 0%, 50%);
+  --color-lighter: hsl(0, 0%, 70%);
+  --primary-color: #0290ff;
+  --background-color: #f5f6fa;
+  --border-color: #e8e8e8;
+  font-size: 16px;
+}
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--background-color);
+  color: var(--color);
+}
+header {
+  background-color: #fff;
+  border-bottom: 2px solid var(--border-color);
+  color: var(--primary-color);
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  h1 {
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  select {
+    margin-left: 1rem;
+  }
+}
+nav,
+.BookList,
+form {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+select, input {
+  border-radius: 4px;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  margin-bottom: 0.5rem;
+}
+form {
+  margin: 0.5rem auto 2rem auto;
+  padding: 0.5rem 1rem;
+  border-top: 2px solid var(--border-color);
+  h4 {
+    color: var(--color-light);
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  input,
+  select {
+    flex-grow: 1;
+    @media screen and (min-width: 620px) {
+      margin-right: 1rem;
+    }
+  }
+  select.inactive,
+  input::placeholder {
+    color: var(--color-lighter);
+  }
+  >div {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    @media screen and (min-width: 620px) {
+        flex-direction: row;
+        align-items: baseline;
+    }
+  }
+  button {
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.Book {
+  text-align: left;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: #ffffff;
+  margin: 1rem 0;
+  padding: 1rem;
+  font-family: 'Roboto Slab', serif;
+  .Book-category {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: var(--color-light);
+  }
+  .Book-title {
+    margin: 0.25rem 0 0 0;
+  }
+  .Book-id {
+    text-transform: uppercase;
+    color: var(--color-light);
+    font-size: 0.75rem;
+  }
+  .Book-id:before {
+    content: 'ID:';
+    margin-right: 0.25rem;
+  }
+  .Book-remove {
+    color: var(--primary-color);
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+}
