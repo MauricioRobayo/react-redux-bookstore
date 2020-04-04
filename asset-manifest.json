@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/react-redux-bookstore/static/css/main.86c3d117.chunk.css",
+    "main.css": "/react-redux-bookstore/static/css/main.f3f40f12.chunk.css",
     "main.js": "/react-redux-bookstore/static/js/main.7c9f7fd8.chunk.js",
     "main.js.map": "/react-redux-bookstore/static/js/main.7c9f7fd8.chunk.js.map",
     "runtime-main.js": "/react-redux-bookstore/static/js/runtime-main.01e5faf0.js",
@@ -8,15 +8,15 @@
     "static/js/2.3b2683a6.chunk.js": "/react-redux-bookstore/static/js/2.3b2683a6.chunk.js",
     "static/js/2.3b2683a6.chunk.js.map": "/react-redux-bookstore/static/js/2.3b2683a6.chunk.js.map",
     "index.html": "/react-redux-bookstore/index.html",
-    "precache-manifest.f4477fc2e1a74e781f9926a7ebb58c37.js": "/react-redux-bookstore/precache-manifest.f4477fc2e1a74e781f9926a7ebb58c37.js",
+    "precache-manifest.b861b9c075d0cb3182dc3e11850b07fc.js": "/react-redux-bookstore/precache-manifest.b861b9c075d0cb3182dc3e11850b07fc.js",
     "service-worker.js": "/react-redux-bookstore/service-worker.js",
-    "static/css/main.86c3d117.chunk.css.map": "/react-redux-bookstore/static/css/main.86c3d117.chunk.css.map",
+    "static/css/main.f3f40f12.chunk.css.map": "/react-redux-bookstore/static/css/main.f3f40f12.chunk.css.map",
     "static/js/2.3b2683a6.chunk.js.LICENSE.txt": "/react-redux-bookstore/static/js/2.3b2683a6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.01e5faf0.js",
     "static/js/2.3b2683a6.chunk.js",
-    "static/css/main.86c3d117.chunk.css",
+    "static/css/main.f3f40f12.chunk.css",
     "static/js/main.7c9f7fd8.chunk.js"
   ]
 }
