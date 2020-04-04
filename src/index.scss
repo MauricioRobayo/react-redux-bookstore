@@ -81,6 +81,9 @@ footer {
     input::placeholder {
       color: var(--color-lighter);
     }
+    input {
+      flex-grow: 2;
+    }
     > div {
       display: flex;
       flex-direction: column;
