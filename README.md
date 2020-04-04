@@ -2,17 +2,15 @@
 
 Bookstore management tool with React and Redux.
 
-[Live demo](https://www.mauriciorobayo.com/react-redux-bookstore).
-
 [![screenshot](./app_screenshot.png)](https://www.mauriciorobayo.com/react-redux-bookstore)
+
+## Live Demo
+
+[Live Demo Link](https://www.mauriciorobayo.com/react-redux-bookstore)
 
 ## Built With
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Live Demo
-
-[Live Demo Link](https://floating-reef-28181.herokuapp.com/)
 
 ## Getting Started
 
