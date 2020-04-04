@@ -1,12 +1,12 @@
 const books = (state = [], { type, book }) => {
   switch (type) {
     case 'CREATE_BOOK':
-      return [...state, book]
+      return [...state, book];
     case 'REMOVE_BOOK':
-      return state.filter(currBook => currBook.id !== book.id)
+      return state.filter((currBook) => currBook.id !== book.id);
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default books
+export default books;
