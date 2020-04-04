@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Header = ({ children }) => (
   <header>
@@ -8,10 +8,10 @@ const Header = ({ children }) => (
       {children}
     </nav>
   </header>
-)
+);
 
 Header.propTypes = {
   children: PropTypes.element.isRequired,
-}
+};
 
-export default Header
+export default Header;

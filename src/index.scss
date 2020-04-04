@@ -37,7 +37,8 @@ form {
   margin: 0 auto;
   padding: 1rem;
 }
-select, input {
+select,
+input {
   border-radius: 4px;
   padding: 0.5rem;
   border: 1px solid var(--border-color);
@@ -64,13 +65,13 @@ form {
   input::placeholder {
     color: var(--color-lighter);
   }
-  >div {
+  > div {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     @media screen and (min-width: 620px) {
-        flex-direction: row;
-        align-items: baseline;
+      flex-direction: row;
+      align-items: baseline;
     }
   }
   button {

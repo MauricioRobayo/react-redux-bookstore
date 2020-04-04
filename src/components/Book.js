@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Book = ({ book, handleRemoveBook }) => (
   <div className="Book">
@@ -14,7 +14,7 @@ const Book = ({ book, handleRemoveBook }) => (
       Remove
     </button>
   </div>
-)
+);
 
 Book.propTypes = {
   book: PropTypes.shape({
@@ -23,6 +23,6 @@ Book.propTypes = {
     category: PropTypes.string,
   }).isRequired,
   handleRemoveBook: PropTypes.func.isRequired,
-}
+};
 
-export default Book
+export default Book;
