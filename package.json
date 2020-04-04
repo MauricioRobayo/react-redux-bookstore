@@ -47,9 +47,7 @@
     "prettier": "^2.0.2"
   },
   "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "all"
+    "singleQuote": true
   },
   "husky": {
     "hooks": {
