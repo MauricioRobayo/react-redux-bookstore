@@ -2,7 +2,7 @@
   "name": "bookstore",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mauriciorobayo.github.io/bookstore",
+  "homepage": "https://www.mauriciorobayo.com/react-redux-bookstore",
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
