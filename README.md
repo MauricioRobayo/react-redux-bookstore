@@ -2,7 +2,9 @@
 
 Bookstore management tool with React and Redux.
 
-[![screenshot](./app_screenshot.png)](https://www.mauriciorobayo.com/react-redux-bookstore/)
+[Live demo](https://www.mauriciorobayo.com/react-redux-bookstore).
+
+[![screenshot](./app_screenshot.png)](https://www.mauriciorobayo.com/react-redux-bookstore)
 
 ## Built With
 
