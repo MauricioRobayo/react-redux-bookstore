@@ -83,12 +83,12 @@ class BooksForm extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  createBook: (book) => dispatch(createBook(book)),
-});
-
 BooksForm.propTypes = {
   createBook: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  createBook: (book) => dispatch(createBook(book)),
+});
 
 export default connect(null, mapDispatchToProps)(BooksForm);

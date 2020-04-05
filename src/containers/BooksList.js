@@ -71,17 +71,6 @@ class BooksList extends Component {
   }
 }
 
-const mapStateToProps = ({ books, filter }) => ({
-  books,
-  filter,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  removeBook: (book) => dispatch(removeBook(book)),
-  createBook: (book) => dispatch(createBook(book)),
-  changeFilter: (filter) => dispatch(changeFilter(filter)),
-});
-
 BooksList.propTypes = {
   books: PropTypes.arrayOf(
     PropTypes.shape({
@@ -95,5 +84,16 @@ BooksList.propTypes = {
   createBook: PropTypes.func.isRequired,
   changeFilter: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = ({ books, filter }) => ({
+  books,
+  filter,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  removeBook: (book) => dispatch(removeBook(book)),
+  createBook: (book) => dispatch(createBook(book)),
+  changeFilter: (filter) => dispatch(changeFilter(filter)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksList);
