@@ -4,7 +4,7 @@ import categories from '../config';
 
 const Filter = ({ handleFilterChange }) => (
   <label htmlFor="filter">
-    Filter by:
+    Category
     <select
       id="filter"
       onChange={(event) => handleFilterChange(event.target.value)}
