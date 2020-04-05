@@ -1,4 +1,4 @@
-## React-Redux Bookstore ![Build and Deploy](https://github.com/MauricioRobayo/react-redux-bookstore/workflows/Build%20and%20Deploy/badge.svg)
+## React-Redux Bookstore [![Build and Deploy](https://github.com/MauricioRobayo/react-redux-bookstore/workflows/Build%20and%20Deploy/badge.svg)](https://github.com/MauricioRobayo/react-redux-bookstore/actions?query=workflow%3A%22Build+and+Deploy%22)
 
 Bookstore management tool with React and Redux.
 
