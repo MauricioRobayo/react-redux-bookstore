@@ -73,25 +73,15 @@ footer {
       padding: 0.5rem;
       flex-grow: 1;
       background-color: white;
-      @media screen and (min-width: 620px) {
-        margin-right: 1rem;
-      }
     }
     select.inactive,
     input::placeholder {
       color: var(--color-lighter);
     }
-    input {
-      flex-grow: 2;
-    }
     > div {
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      @media screen and (min-width: 620px) {
-        flex-direction: row;
-        align-items: baseline;
-      }
     }
     button {
       border-radius: 4px;
@@ -99,6 +89,18 @@ footer {
       color: white;
       border: none;
       padding: 0.5rem 1rem;
+    }
+    @media screen and (min-width: 620px) {
+      input {
+        flex-grow: 2;
+      }
+      select {
+        margin: 0 1rem;
+      }
+      > div {
+        flex-direction: row;
+        align-items: baseline;
+      }
     }
   }
 }
