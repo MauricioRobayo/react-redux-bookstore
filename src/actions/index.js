@@ -13,4 +13,22 @@ const changeFilter = (filter) => ({
   filter,
 });
 
-export { createBook, removeBook, changeFilter };
+const getRandomBooks = (dispatch) => {
+  // https://www.googleapis.com/books/v1/volumes?q=subject:fiction&filter=free-ebooks&maxResults=40
+  fetch('http://openlibrary.org/search.json?q=javascript')
+    .then((response) => response.json())
+    .then((data) => {
+      const books = data.docs
+        .filter(
+          ({ title, cover_i: id }) => title.toLowerCase() !== 'javascript' && id
+        )
+        .map(({ cover_i: id, title, type: category }) => ({
+          id,
+          title,
+          category,
+        }));
+      dispatch({ type: 'LOAD_BOOKS', books });
+    });
+};
+
+export { createBook, removeBook, changeFilter, getRandomBooks };

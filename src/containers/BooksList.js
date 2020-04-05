@@ -1,38 +1,15 @@
 import PropTypes from 'prop-types';
-import uniqid from 'uniqid';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Book from '../components/Book';
-import { removeBook, createBook, changeFilter } from '../actions';
+import { removeBook, getRandomBooks, changeFilter } from '../actions';
 import CategoryFilter from '../components/CategoryFilter';
 import Header from '../components/Header';
 
 class BooksList extends Component {
   componentDidMount() {
-    const { createBook } = this.props;
-    const books = [
-      {
-        id: uniqid(),
-        title: 'JS: The Good Parts',
-        category: 'Learning',
-      },
-      {
-        id: uniqid(),
-        title: 'Eloquent JS',
-        category: 'Learning',
-      },
-      {
-        id: uniqid(),
-        title: "You don't know JS",
-        category: 'History',
-      },
-      {
-        id: uniqid(),
-        title: 'JS Ninja',
-        category: 'Biography',
-      },
-    ];
-    books.forEach(createBook);
+    const { getRandomBooks } = this.props;
+    getRandomBooks();
   }
 
   handleRemoveBook = (book) => {
@@ -56,15 +33,19 @@ class BooksList extends Component {
           />
         </Header>
         <div className="BookList">
-          {books
-            .filter((book) => filter === book.category || filter === 'All')
-            .map((book) => (
-              <Book
-                key={book.id}
-                book={book}
-                handleRemoveBook={this.handleRemoveBook}
-              />
-            ))}
+          {books.length === 0 ? (
+            <div>Loading...</div>
+          ) : (
+            books
+              .filter((book) => filter === book.category || filter === 'All')
+              .map((book) => (
+                <Book
+                  key={book.id}
+                  book={book}
+                  handleRemoveBook={this.handleRemoveBook}
+                />
+              ))
+          )}
         </div>
       </>
     );
@@ -81,7 +62,7 @@ BooksList.propTypes = {
   ).isRequired,
   filter: PropTypes.string.isRequired,
   removeBook: PropTypes.func.isRequired,
-  createBook: PropTypes.func.isRequired,
+  getRandomBooks: PropTypes.func.isRequired,
   changeFilter: PropTypes.func.isRequired,
 };
 
@@ -92,8 +73,8 @@ const mapStateToProps = ({ books, filter }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   removeBook: (book) => dispatch(removeBook(book)),
-  createBook: (book) => dispatch(createBook(book)),
   changeFilter: (filter) => dispatch(changeFilter(filter)),
+  getRandomBooks: () => getRandomBooks(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksList);
