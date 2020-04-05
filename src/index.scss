@@ -5,7 +5,10 @@ html {
   --primary-color: #0290ff;
   --background-color: #f5f6fa;
   --border-color: #e8e8e8;
-  font-size: 16px;
+  font-size: 14px;
+  @media screen and (min-width: 620px) {
+    font-size: 16px;
+  }
 }
 body {
   margin: 0;
@@ -13,6 +16,7 @@ body {
   background-color: var(--background-color);
   color: var(--color);
 }
+
 header {
   background-color: #fff;
   border-bottom: 2px solid var(--border-color);
@@ -21,25 +25,25 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  h1 {
-    font-weight: bold;
-    margin: 0.5rem 0;
-  }
-  label {
-    color: var(--color);
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    @media screen and (min-width: 620px) {
-      flex-direction: row;
+    h1 {
+      font-weight: bold;
+      margin: 0.5rem 0;
+    }
+    label {
+      color: var(--color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    select {
+      background-color: white;
+      margin: 0 0 0 1rem;
     }
   }
-  select {
-    margin-left: 0;
-    background-color: white;
-    @media screen and (min-width: 620px) {
-      margin: 0 0 0 1rem;
+  @media screen and (min-width: 620px) {
+    nav {
+      flex-direction: row;
     }
   }
 }
@@ -127,6 +131,7 @@ footer {
   img {
     height: 100px;
     grid-area: img;
+    align-self: start;
   }
   .Book-category {
     grid-area: category;
