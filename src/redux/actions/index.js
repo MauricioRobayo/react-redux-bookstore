@@ -1,3 +1,5 @@
+import bookCategories from '../../config';
+
 const createBook = (book) => ({
   type: 'CREATE_BOOK',
   book,
@@ -14,21 +16,37 @@ const changeFilter = (filter) => ({
 });
 
 const getRandomBooks = (dispatch) => {
-  // https://www.googleapis.com/books/v1/volumes?q=subject:fiction&filter=free-ebooks&maxResults=40
-  fetch('https://openlibrary.org/search.json?q=javascript')
-    .then((response) => response.json())
-    .then((data) => {
-      const books = data.docs
-        .filter(
-          ({ title, cover_i: id }) => title.toLowerCase() !== 'javascript' && id
+  const fetchCategory = async (category) => {
+    const response = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=40`
+    );
+    return response.json();
+  };
+
+  Promise.all(bookCategories.map(fetchCategory)).then((booksByCategory) => {
+    const books = booksByCategory
+      .map(({ items }) =>
+        items.map(
+          (
+            {
+              id,
+              volumeInfo: {
+                title,
+                imageLinks: { smallThumbnail: thumbnail = '' } = {},
+              },
+            },
+            index
+          ) => ({
+            id,
+            title,
+            thumbnail,
+            category: bookCategories[index],
+          })
         )
-        .map(({ cover_i: id, title, type: category }) => ({
-          id,
-          title,
-          category,
-        }));
-      dispatch({ type: 'LOAD_BOOKS', books });
-    });
+      )
+      .flat();
+    dispatch({ type: 'LOAD_BOOKS', books });
+  });
 };
 
 export { createBook, removeBook, changeFilter, getRandomBooks };
