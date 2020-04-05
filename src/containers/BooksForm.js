@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 import { connect } from 'react-redux';
-import { createBook } from '../actions';
+import { createBook } from '../redux/actions';
 import bookCategories from '../config';
 
 class BooksForm extends Component {

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Book from '../components/Book';
-import { removeBook, getRandomBooks, changeFilter } from '../actions';
+import { removeBook, getRandomBooks, changeFilter } from '../redux/actions';
 import CategoryFilter from '../components/CategoryFilter';
 import Header from '../components/Header';
 
@@ -74,7 +74,7 @@ const mapStateToProps = ({ books, filter }) => ({
 const mapDispatchToProps = (dispatch) => ({
   removeBook: (book) => dispatch(removeBook(book)),
   changeFilter: (filter) => dispatch(changeFilter(filter)),
-  getRandomBooks: () => getRandomBooks(dispatch),
+  getRandomBooks: () => dispatch(getRandomBooks),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksList);
