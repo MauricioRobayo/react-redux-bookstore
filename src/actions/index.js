@@ -15,7 +15,7 @@ const changeFilter = (filter) => ({
 
 const getRandomBooks = (dispatch) => {
   // https://www.googleapis.com/books/v1/volumes?q=subject:fiction&filter=free-ebooks&maxResults=40
-  fetch('http://openlibrary.org/search.json?q=javascript')
+  fetch('https://openlibrary.org/search.json?q=javascript')
     .then((response) => response.json())
     .then((data) => {
       const books = data.docs
