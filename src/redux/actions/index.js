@@ -38,12 +38,12 @@ const getRandomBooks = (dispatch) => {
               id,
               volumeInfo: {
                 title,
-                imageLinks: { smallThumbnail: thumbnail = '' } = {},
+                imageLinks: { smallThumbnail },
               },
             }) => ({
               id,
               title,
-              thumbnail,
+              thumbnail: smallThumbnail.replace(/^http:/, 'https:'),
               category: bookCategories[index],
             })
           )
