@@ -25,24 +25,28 @@ const getRandomBooks = (dispatch) => {
 
   Promise.all(bookCategories.map(fetchCategory)).then((booksByCategory) => {
     const books = booksByCategory
-      .map(({ items }) =>
-        items.map(
-          (
-            {
+      .map(({ items }, index) =>
+        items
+          .filter(
+            ({ volumeInfo: { imageLinks: { smallThumbnail = '' } = {} } }) =>
+              smallThumbnail !== ''
+          )
+          .sort(() => 0.5 - Math.random())
+          .slice(0, Math.floor(Math.random() * 3 + 1))
+          .map(
+            ({
               id,
               volumeInfo: {
                 title,
                 imageLinks: { smallThumbnail: thumbnail = '' } = {},
               },
-            },
-            index
-          ) => ({
-            id,
-            title,
-            thumbnail,
-            category: bookCategories[index],
-          })
-        )
+            }) => ({
+              id,
+              title,
+              thumbnail,
+              category: bookCategories[index],
+            })
+          )
       )
       .flat();
     dispatch({ type: 'LOAD_BOOKS', books });

@@ -113,15 +113,33 @@ footer {
   margin: 1rem 0;
   padding: 1rem;
   font-family: 'Roboto Slab', serif;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 1rem;
+  justify-items: start;
+  align-items: end;
+  grid-template-areas: 
+    'img category'
+    'img title'
+    'img id'
+    'img remove'
+  ;
+  img {
+    height: 100px;
+    grid-area: img;
+  }
   .Book-category {
+    grid-area: category;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     color: var(--color-light);
   }
   .Book-title {
+    grid-area: title;
     margin: 0.25rem 0 0 0;
   }
   .Book-id {
+    grid-area: id;
     text-transform: uppercase;
     color: var(--color-light);
     font-size: 0.75rem;
@@ -131,6 +149,7 @@ footer {
     margin-right: 0.25rem;
   }
   .Book-remove {
+    grid-area: remove;
     color: var(--primary-color);
     border: none;
     background-color: transparent;

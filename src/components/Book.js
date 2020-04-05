@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const Book = ({ book, handleRemoveBook }) => (
   <div className="Book">
+    <img src={book.thumbnail} alt="" />
     <div className="Book-category">{book.category}</div>
     <h2 className="Book-title">{book.title}</h2>
     <div className="Book-id">{book.id}</div>
@@ -21,6 +22,7 @@ Book.propTypes = {
     id: PropTypes.string,
     title: PropTypes.string,
     category: PropTypes.string,
+    thumbnail: PropTypes.string,
   }).isRequired,
   handleRemoveBook: PropTypes.func.isRequired,
 };
