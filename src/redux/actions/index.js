@@ -22,42 +22,43 @@ const changeFilter = (filter) => ({
   filter,
 });
 
-const getRandomBooks = (dispatch) => {
+const getRandomBooks = () => {
   const fetchCategory = async (category) => {
     const response = await fetch(
       `https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=40`
     );
     return response.json();
   };
-
-  Promise.all(bookCategories.map(fetchCategory)).then((booksByCategory) => {
-    const books = booksByCategory
-      .map(({ items }, index) =>
-        items
-          .filter(
-            ({ volumeInfo: { imageLinks: { smallThumbnail = '' } = {} } }) =>
-              smallThumbnail !== ''
-          )
-          .sort(() => 0.5 - Math.random())
-          .slice(0, Math.floor(Math.random() * 3 + 1))
-          .map(
-            ({
-              id,
-              volumeInfo: {
+  return (dispatch) => {
+    Promise.all(bookCategories.map(fetchCategory)).then((booksByCategory) => {
+      const books = booksByCategory
+        .map(({ items }, index) =>
+          items
+            .filter(
+              ({ volumeInfo: { imageLinks: { smallThumbnail = '' } = {} } }) =>
+                smallThumbnail !== ''
+            )
+            .sort(() => 0.5 - Math.random())
+            .slice(0, Math.floor(Math.random() * 3 + 1))
+            .map(
+              ({
+                id,
+                volumeInfo: {
+                  title,
+                  imageLinks: { smallThumbnail },
+                },
+              }) => ({
+                id,
                 title,
-                imageLinks: { smallThumbnail },
-              },
-            }) => ({
-              id,
-              title,
-              thumbnail: smallThumbnail.replace(/^http:/, 'https:'),
-              category: bookCategories[index],
-            })
-          )
-      )
-      .flat();
-    dispatch({ type: actionTypes.LOAD_BOOKS, books });
-  });
+                thumbnail: smallThumbnail.replace(/^http:/, 'https:'),
+                category: bookCategories[index],
+              })
+            )
+        )
+        .flat();
+      dispatch({ type: actionTypes.LOAD_BOOKS, books });
+    });
+  };
 };
 
 export { createBook, removeBook, changeFilter, getRandomBooks, actionTypes };
