@@ -1,17 +1,24 @@
 import bookCategories from '../../config';
 
+const actionTypes = {
+  CREATE_BOOK: 'CREATE_BOOK',
+  REMOVE_BOOK: 'REMOVE_BOOK',
+  CHANGE_FILTER: 'CHANGE_FILTER',
+  LOAD_BOOKS: 'LOAD_BOOKS',
+};
+
 const createBook = (book) => ({
-  type: 'CREATE_BOOK',
+  type: actionTypes.CREATE_BOOK,
   book,
 });
 
 const removeBook = (book) => ({
-  type: 'REMOVE_BOOK',
+  type: actionTypes.REMOVE_BOOK,
   book,
 });
 
 const changeFilter = (filter) => ({
-  type: 'CHANGE_FILTER',
+  type: actionTypes.CHANGE_FILTER,
   filter,
 });
 
@@ -49,8 +56,8 @@ const getRandomBooks = (dispatch) => {
           )
       )
       .flat();
-    dispatch({ type: 'LOAD_BOOKS', books });
+    dispatch({ type: actionTypes.LOAD_BOOKS, books });
   });
 };
 
-export { createBook, removeBook, changeFilter, getRandomBooks };
+export { createBook, removeBook, changeFilter, getRandomBooks, actionTypes };
