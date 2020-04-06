@@ -5,11 +5,12 @@ import Book from '../components/Book';
 import { removeBook, getRandomBooks, changeFilter } from '../redux/actions';
 import CategoryFilter from '../components/CategoryFilter';
 import Header from '../components/Header';
+import bookCategories from '../config';
 
 class BooksList extends Component {
   componentDidMount() {
     const { getRandomBooks } = this.props;
-    getRandomBooks();
+    getRandomBooks(bookCategories);
   }
 
   handleRemoveBook = (book) => {
@@ -74,7 +75,7 @@ const mapStateToProps = ({ books, filter }) => ({
 const mapDispatchToProps = (dispatch) => ({
   removeBook: (book) => dispatch(removeBook(book)),
   changeFilter: (filter) => dispatch(changeFilter(filter)),
-  getRandomBooks: () => dispatch(getRandomBooks()),
+  getRandomBooks: (categories) => dispatch(getRandomBooks(categories)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksList);

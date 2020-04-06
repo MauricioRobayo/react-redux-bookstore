@@ -1,5 +1,3 @@
-import bookCategories from '../../config';
-
 const actionTypes = {
   CREATE_BOOK: 'CREATE_BOOK',
   REMOVE_BOOK: 'REMOVE_BOOK',
@@ -22,7 +20,7 @@ const changeFilter = (filter) => ({
   filter,
 });
 
-const getRandomBooks = () => {
+const getRandomBooks = (categories) => {
   const fetchCategory = async (category) => {
     const response = await fetch(
       `https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=40`
@@ -30,7 +28,7 @@ const getRandomBooks = () => {
     return response.json();
   };
   return (dispatch) => {
-    Promise.all(bookCategories.map(fetchCategory)).then((booksByCategory) => {
+    Promise.all(categories.map(fetchCategory)).then((booksByCategory) => {
       const books = booksByCategory
         .map(({ items }, index) =>
           items
@@ -51,7 +49,7 @@ const getRandomBooks = () => {
                 id,
                 title,
                 thumbnail: smallThumbnail.replace(/^http:/, 'https:'),
-                category: bookCategories[index],
+                category: categories[index],
               })
             )
         )
