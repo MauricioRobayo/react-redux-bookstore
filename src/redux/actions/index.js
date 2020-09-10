@@ -22,8 +22,13 @@ const changeFilter = (filter) => ({
 
 const getRandomBooks = (categories) => {
   const fetchCategory = async (category) => {
+    const searchparams = new URLSearchParams({
+      q: `subject:${category}`,
+      maxResults: 40,
+      fields: 'items(id,volumeInfo(title,imageLinks/smallThumbnail))',
+    });
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=40`
+      `https://www.googleapis.com/books/v1/volumes?${searchparams}`
     );
     return response.json();
   };
