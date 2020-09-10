@@ -87,8 +87,8 @@ BooksForm.propTypes = {
   createBook: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  createBook: (book) => dispatch(createBook(book)),
-});
+const mapDispatchToProps = {
+  createBook,
+};
 
 export default connect(null, mapDispatchToProps)(BooksForm);

@@ -72,10 +72,10 @@ const mapStateToProps = ({ books, filter }) => ({
   filter,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  removeBook: (book) => dispatch(removeBook(book)),
-  changeFilter: (filter) => dispatch(changeFilter(filter)),
-  getRandomBooks: (categories) => dispatch(getRandomBooks(categories)),
-});
+const mapDispatchToProps = {
+  removeBook,
+  changeFilter,
+  getRandomBooks,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksList);
