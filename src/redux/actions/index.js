@@ -35,31 +35,45 @@ const getRandomBooks = (categories) => {
 
   const MAX_BOOKS_PER_CATEGORY = 3;
 
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  function sample(array, size) {
+    return shuffle(array).slice(0, size);
+  }
+
   return (dispatch) => {
     Promise.all(categories.map(fetchCategory)).then((booksByCategory) => {
       const books = booksByCategory
         .map(({ items }, index) =>
-          items
-            .filter(
-              ({ volumeInfo: { imageLinks: { smallThumbnail = '' } = {} } }) =>
-                smallThumbnail !== ''
-            )
-            .sort(() => 0.5 - Math.random())
-            .slice(0, Math.floor(Math.random() * MAX_BOOKS_PER_CATEGORY + 1))
-            .map(
-              ({
-                id,
-                volumeInfo: {
+          sample(
+            items
+              .filter(
+                ({
+                  volumeInfo: { imageLinks: { smallThumbnail = '' } = {} },
+                }) => smallThumbnail !== ''
+              )
+              .map(
+                ({
+                  id,
+                  volumeInfo: {
+                    title,
+                    imageLinks: { smallThumbnail },
+                  },
+                }) => ({
+                  id,
                   title,
-                  imageLinks: { smallThumbnail },
-                },
-              }) => ({
-                id,
-                title,
-                thumbnail: smallThumbnail.replace(/^http:/, 'https:'),
-                category: categories[index],
-              })
-            )
+                  thumbnail: smallThumbnail.replace(/^http:/, 'https:'),
+                  category: categories[index],
+                })
+              ),
+            Math.floor(Math.random() * MAX_BOOKS_PER_CATEGORY + 1)
+          )
         )
         .flat();
       dispatch({ type: actionTypes.LOAD_BOOKS, books });
