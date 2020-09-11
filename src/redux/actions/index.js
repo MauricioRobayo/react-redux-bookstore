@@ -35,16 +35,12 @@ const getRandomBooks = (categories) => {
 
   const MAX_BOOKS_PER_CATEGORY = 3;
 
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i -= 1) {
+  function sample(array, size) {
+    for (let i = array.length - 1; i > array.length - 1 - size; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
-    return array;
-  }
-
-  function sample(array, size) {
-    return shuffle(array).slice(0, size);
+    return array.slice(-size);
   }
 
   return (dispatch) => {
