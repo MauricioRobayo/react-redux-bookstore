@@ -43,17 +43,17 @@ const getRandomBooks = (categories) => {
     return array.slice(-size);
   }
 
+  function hasThumbnail(book) {
+    return Boolean(book.volumeInfo.imageLinks?.smallThumbnail);
+  }
+
   return (dispatch) => {
     Promise.all(categories.map(fetchCategory)).then((booksByCategory) => {
       const books = booksByCategory
         .map(({ items }, index) =>
           sample(
             items
-              .filter(
-                ({
-                  volumeInfo: { imageLinks: { smallThumbnail = '' } = {} },
-                }) => smallThumbnail !== ''
-              )
+              .filter(hasThumbnail)
               .map(
                 ({
                   id,
