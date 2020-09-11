@@ -32,6 +32,9 @@ const getRandomBooks = (categories) => {
     );
     return response.json();
   };
+
+  const MAX_BOOKS_PER_CATEGORY = 3;
+
   return (dispatch) => {
     Promise.all(categories.map(fetchCategory)).then((booksByCategory) => {
       const books = booksByCategory
@@ -42,7 +45,7 @@ const getRandomBooks = (categories) => {
                 smallThumbnail !== ''
             )
             .sort(() => 0.5 - Math.random())
-            .slice(0, Math.floor(Math.random() * 3 + 1))
+            .slice(0, Math.floor(Math.random() * MAX_BOOKS_PER_CATEGORY + 1))
             .map(
               ({
                 id,
