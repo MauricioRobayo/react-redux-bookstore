@@ -67,17 +67,20 @@ const getRandomBooks = (categories) => {
 
   return (dispatch) => {
     Promise.all(categories.map(fetchCategory)).then((booksByCategory) => {
-      const books = booksByCategory
-        .map(({ items }, index) =>
-          sample(
-            items
+      dispatch({
+        type: actionTypes.LOAD_BOOKS,
+        books: booksByCategory
+          .map(({ items }, index) => {
+            const randomSampleSize = Math.floor(
+              Math.random() * MAX_BOOKS_PER_CATEGORY + 1
+            );
+            const categoryBooks = items
               .filter(hasThumbnail)
-              .map((book) => generateBook(book, categories[index])),
-            Math.floor(Math.random() * MAX_BOOKS_PER_CATEGORY + 1)
-          )
-        )
-        .flat();
-      dispatch({ type: actionTypes.LOAD_BOOKS, books });
+              .map((book) => generateBook(book, categories[index]));
+            return sample(categoryBooks, randomSampleSize);
+          })
+          .flat(),
+      });
     });
   };
 };
