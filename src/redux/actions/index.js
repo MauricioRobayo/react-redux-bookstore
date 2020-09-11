@@ -47,6 +47,24 @@ const getRandomBooks = (categories) => {
     return Boolean(book.volumeInfo.imageLinks?.smallThumbnail);
   }
 
+  function generateBook(
+    {
+      id,
+      volumeInfo: {
+        title,
+        imageLinks: { smallThumbnail },
+      },
+    },
+    category
+  ) {
+    return {
+      id,
+      title,
+      thumbnail: smallThumbnail.replace(/^http:/, 'https:'),
+      category,
+    };
+  }
+
   return (dispatch) => {
     Promise.all(categories.map(fetchCategory)).then((booksByCategory) => {
       const books = booksByCategory
@@ -54,20 +72,7 @@ const getRandomBooks = (categories) => {
           sample(
             items
               .filter(hasThumbnail)
-              .map(
-                ({
-                  id,
-                  volumeInfo: {
-                    title,
-                    imageLinks: { smallThumbnail },
-                  },
-                }) => ({
-                  id,
-                  title,
-                  thumbnail: smallThumbnail.replace(/^http:/, 'https:'),
-                  category: categories[index],
-                })
-              ),
+              .map((book) => generateBook(book, categories[index])),
             Math.floor(Math.random() * MAX_BOOKS_PER_CATEGORY + 1)
           )
         )
