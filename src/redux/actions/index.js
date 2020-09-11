@@ -21,16 +21,23 @@ const changeFilter = (filter) => ({
 });
 
 const getRandomBooks = (categories) => {
-  const fetchCategory = async (category) => {
+  const fetchBooks = async (searchparams) => {
+    const response = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?${searchparams}`
+    );
+    if (!response.ok) {
+      throw new Error(`Something went wrong ${response.statusText}`);
+    }
+    return response.json();
+  };
+
+  const fetchBooksByCategory = (category) => {
     const searchparams = new URLSearchParams({
       q: `subject:${category}`,
       maxResults: 40,
       fields: 'items(id,volumeInfo(title,imageLinks/smallThumbnail))',
     });
-    const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?${searchparams}`
-    );
-    return response.json();
+    return fetchBooks(searchparams);
   };
 
   const MAX_BOOKS_PER_CATEGORY = 3;
@@ -66,22 +73,24 @@ const getRandomBooks = (categories) => {
   }
 
   return (dispatch) => {
-    Promise.all(categories.map(fetchCategory)).then((booksByCategory) => {
-      dispatch({
-        type: actionTypes.LOAD_BOOKS,
-        books: booksByCategory
-          .map(({ items }, index) => {
-            const randomSampleSize = Math.floor(
-              Math.random() * MAX_BOOKS_PER_CATEGORY + 1
-            );
-            const categoryBooks = items
-              .filter(hasThumbnail)
-              .map((book) => generateBook(book, categories[index]));
-            return sample(categoryBooks, randomSampleSize);
-          })
-          .flat(),
-      });
-    });
+    Promise.all(categories.map(fetchBooksByCategory)).then(
+      (booksByCategory) => {
+        dispatch({
+          type: actionTypes.LOAD_BOOKS,
+          books: booksByCategory
+            .map(({ items }, index) => {
+              const randomSampleSize = Math.floor(
+                Math.random() * MAX_BOOKS_PER_CATEGORY + 1
+              );
+              const categoryBooks = items
+                .filter(hasThumbnail)
+                .map((book) => generateBook(book, categories[index]));
+              return sample(categoryBooks, randomSampleSize);
+            })
+            .flat(),
+        });
+      }
+    );
   };
 };
 
