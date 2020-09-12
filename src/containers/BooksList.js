@@ -26,6 +26,7 @@ class BooksList extends Component {
           ) : (
             books
               .filter((book) => filter === book.category || filter === 'All')
+              .reverse()
               .map((book) => (
                 <Book
                   key={book.id}
