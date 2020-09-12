@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import BooksList from '../containers/BooksList';
-import BooksForm from '../containers/BooksForm';
-import CategoryFilter from './CategoryFilter';
-import Header from './Header';
+import BooksList from './BooksList';
+import BooksForm from './BooksForm';
+import CategoryFilter from '../components/CategoryFilter';
+import Header from '../components/Header';
 import { changeFilter } from '../redux/actions';
 
 class App extends React.Component {
