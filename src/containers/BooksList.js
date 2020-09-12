@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Book from '../components/Book';
-import { removeBook, getRandomBooks, changeFilter } from '../redux/actions';
-import CategoryFilter from '../components/CategoryFilter';
-import Header from '../components/Header';
+import { removeBook, getRandomBooks } from '../redux/actions';
 import bookCategories from '../config';
 
 class BooksList extends Component {
@@ -18,21 +16,10 @@ class BooksList extends Component {
     removeBook(book);
   };
 
-  handleFilterChange = (filter) => {
-    const { changeFilter } = this.props;
-    changeFilter(filter);
-  };
-
   render() {
     const { books, filter } = this.props;
     return (
       <>
-        <Header>
-          <CategoryFilter
-            filter={filter}
-            handleFilterChange={this.handleFilterChange}
-          />
-        </Header>
         <div className="BookList">
           {books.length === 0 ? (
             <div>Loading...</div>
@@ -64,7 +51,6 @@ BooksList.propTypes = {
   filter: PropTypes.string.isRequired,
   removeBook: PropTypes.func.isRequired,
   getRandomBooks: PropTypes.func.isRequired,
-  changeFilter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ books, filter }) => ({
@@ -74,7 +60,6 @@ const mapStateToProps = ({ books, filter }) => ({
 
 const mapDispatchToProps = {
   removeBook,
-  changeFilter,
   getRandomBooks,
 };
 

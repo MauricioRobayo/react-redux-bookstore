@@ -52,7 +52,7 @@ class BooksForm extends Component {
   render() {
     const { title, category } = this.state;
     return (
-      <footer>
+      <div className="form">
         <form onSubmit={this.handleSubmit}>
           <h4>Add new book</h4>
           <div>
@@ -78,7 +78,7 @@ class BooksForm extends Component {
             </button>
           </div>
         </form>
-      </footer>
+      </div>
     );
   }
 }
