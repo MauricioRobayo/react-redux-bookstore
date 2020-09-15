@@ -4,6 +4,7 @@ import uniqid from 'uniqid';
 import { connect } from 'react-redux';
 import { createBook } from '../redux/actions';
 import bookCategories from '../config';
+import { searchBooksByTitle } from '../api/googleBooksAPI';
 
 class BooksForm extends Component {
   constructor(props) {
@@ -11,11 +12,19 @@ class BooksForm extends Component {
     this.state = {
       title: '',
       category: 'Category',
+      autocomplete: [],
     };
   }
 
   handleChange = (event) => {
     const { name, value } = event.target;
+    if (name === 'title') {
+      searchBooksByTitle(value).then((books) => {
+        this.setState({
+          autocomplete: books.items.map((item) => item.volumeInfo.title),
+        });
+      });
+    }
     this.setState({
       [name]: value,
     });
@@ -50,7 +59,7 @@ class BooksForm extends Component {
     ));
 
   render() {
-    const { title, category } = this.state;
+    const { title, category, autocomplete } = this.state;
     return (
       <div className="form">
         <form onSubmit={this.handleSubmit}>
@@ -65,7 +74,11 @@ class BooksForm extends Component {
                 value={title}
                 onChange={this.handleChange}
               />
-              <ul />
+              <ul>
+                {autocomplete.map((title) => (
+                  <li key={title}>{title}</li>
+                ))}
+              </ul>
             </div>
             <select
               name="category"
