@@ -16,17 +16,21 @@ class BooksForm extends Component {
     };
   }
 
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    if (name === 'title') {
-      searchBooksByTitle(value).then((books) => {
-        this.setState({
-          autocomplete: books.items.map((item) => item.volumeInfo.title),
-        });
+  handleInputChange = (event) => {
+    const { value } = event.target;
+    searchBooksByTitle(value).then((books) => {
+      this.setState({
+        autocomplete: books.items.map((item) => item.volumeInfo.title),
       });
-    }
+    });
     this.setState({
-      [name]: value,
+      title: value,
+    });
+  };
+
+  handleCategoryChange = (event) => {
+    this.setState({
+      category: event.target.value,
     });
   };
 
@@ -68,11 +72,10 @@ class BooksForm extends Component {
             <div className="autocomplete">
               <input
                 type="text"
-                name="title"
                 id="title"
                 placeholder="Book title"
                 value={title}
-                onChange={this.handleChange}
+                onChange={this.handleInputChange}
               />
               <ul>
                 {autocomplete.map((title) => (
@@ -84,7 +87,7 @@ class BooksForm extends Component {
               name="category"
               id="category"
               value={category}
-              onChange={this.handleChange}
+              onChange={this.handleCategoryChange}
               className={category === 'Category' ? 'inactive' : ''}
             >
               {this.renderCategories()}
