@@ -56,14 +56,17 @@ class BooksForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <h4>Add new book</h4>
           <div>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              placeholder="Book title"
-              value={title}
-              onChange={this.handleChange}
-            />
+            <div className="autocomplete">
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Book title"
+                value={title}
+                onChange={this.handleChange}
+              />
+              <ul />
+            </div>
             <select
               name="category"
               id="category"
