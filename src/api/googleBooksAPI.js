@@ -9,12 +9,20 @@ const fetchBooks = async (searchparams) => {
 };
 
 const fetchBooksByCategory = (category) => {
-  const searchparams = new URLSearchParams({
+  const searchParams = new URLSearchParams({
     q: `subject:${category}`,
     maxResults: 40,
     fields: 'items(id,volumeInfo(title,imageLinks/smallThumbnail))',
   });
-  return fetchBooks(searchparams);
+  return fetchBooks(searchParams);
 };
 
-export { fetchBooksByCategory }; // eslint-disable-line import/prefer-default-export
+const searchBooksByTitle = (title) => {
+  const searchParams = new URLSearchParams({
+    q: `intitle:${title}`,
+    fields: 'items(volumeInfo/title)',
+  });
+  return fetchBooks(searchParams);
+};
+
+export { fetchBooksByCategory, searchBooksByTitle };
