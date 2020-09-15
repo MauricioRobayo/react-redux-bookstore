@@ -6,6 +6,16 @@ import { createBook } from '../redux/actions';
 import bookCategories from '../config';
 import { searchBooksByTitle } from '../api/googleBooksAPI';
 
+// function debounce(func, delay) {
+//   let timeout = null;
+//   return function _(...args) {
+//     clearTimeout(timeout)
+//     timeout = setTimeout(() => {func.apply(this, args)}, delay)
+//   }
+// }
+
+// const debouncedSearchBooksByTitle = debounce(searchBooksByTitle, 250)
+
 class BooksForm extends Component {
   constructor(props) {
     super(props);
@@ -14,15 +24,30 @@ class BooksForm extends Component {
       category: 'Category',
       autocomplete: [],
     };
+    this.debouncedAutocomplete = this.debounce(this.autocomplete, 250);
   }
 
-  handleInputChange = (event) => {
-    const { value } = event.target;
+  debounce = (func, delay) => {
+    let timeout = null;
+    return function _(...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  };
+
+  autocomplete = (value) => {
     searchBooksByTitle(value).then((books) => {
       this.setState({
         autocomplete: books.items.map((item) => item.volumeInfo.title),
       });
     });
+  };
+
+  handleInputChange = (event) => {
+    const { value } = event.target;
+    this.debouncedAutocomplete(value);
     this.setState({
       title: value,
     });
