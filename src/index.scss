@@ -61,6 +61,9 @@ input {
   border: 1px solid var(--border-color);
   margin-bottom: 0.5rem;
 }
+select, input, button {
+  font-size: 1rem;
+}
 .form {
   padding: 0 1rem;
   form {
@@ -176,7 +179,7 @@ input {
   position: relative;
   ul {
     // display: none;
-    font-size: 0.75rem;
+    font-size: 1rem;
     background-color: white;
     position: absolute;
     list-style: none;
