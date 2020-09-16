@@ -94,20 +94,24 @@ class BooksForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <h4>Add new book</h4>
           <div>
-            <div className="autocomplete">
-              <input
-                type="text"
-                id="title"
-                placeholder="Book title"
-                value={title}
-                onChange={this.handleInputChange}
-              />
-              <ul>
-                {autocomplete.map((title) => (
-                  <li key={title}>{title}</li>
-                ))}
-              </ul>
-            </div>
+            <input
+              list="titles"
+              type="text"
+              id="title"
+              placeholder="Book title"
+              value={title}
+              onChange={this.handleInputChange}
+              aria-label="title"
+            />
+            <datalist id="titles">
+              {autocomplete.map((title) => (
+                <option
+                  aria-label="title suggestions"
+                  key={title}
+                  value={title}
+                />
+              ))}
+            </datalist>
             <select
               name="category"
               id="category"
