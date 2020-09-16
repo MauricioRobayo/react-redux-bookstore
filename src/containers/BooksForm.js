@@ -114,6 +114,7 @@ class BooksForm extends Component {
             </datalist>
             <select
               name="category"
+              aria-label="category"
               id="category"
               value={category}
               onChange={this.handleCategoryChange}
