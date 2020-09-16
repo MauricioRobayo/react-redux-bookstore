@@ -12,7 +12,7 @@ class BooksForm extends Component {
     this.state = {
       title: '',
       category: 'Category',
-      autocomplete: [],
+      suggestions: [],
     };
     this.debouncedAutocomplete = this.debounce(this.autocomplete, 250);
   }
@@ -30,7 +30,7 @@ class BooksForm extends Component {
   autocomplete = (value) => {
     searchBooksByTitle(value).then((books) => {
       this.setState({
-        autocomplete: books.items.map((item) => ({
+        suggestions: books.items.map((item) => ({
           id: item.id,
           title: item.volumeInfo.title,
         })),
@@ -81,7 +81,7 @@ class BooksForm extends Component {
     ));
 
   render() {
-    const { title, category, autocomplete } = this.state;
+    const { title, category, suggestions } = this.state;
     return (
       <div className="form">
         <form onSubmit={this.handleSubmit}>
@@ -97,7 +97,7 @@ class BooksForm extends Component {
               aria-label="title"
             />
             <datalist id="titles">
-              {autocomplete.map(({ id, title }) => (
+              {suggestions.map(({ id, title }) => (
                 <option aria-label="title suggestions" key={id} value={title} />
               ))}
             </datalist>
