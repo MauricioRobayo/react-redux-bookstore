@@ -40,7 +40,10 @@ class BooksForm extends Component {
   autocomplete = (value) => {
     searchBooksByTitle(value).then((books) => {
       this.setState({
-        autocomplete: books.items.map((item) => item.volumeInfo.title),
+        autocomplete: books.items.map((item) => ({
+          id: item.id,
+          title: item.volumeInfo.title,
+        })),
       });
     });
   };
@@ -104,12 +107,8 @@ class BooksForm extends Component {
               aria-label="title"
             />
             <datalist id="titles">
-              {autocomplete.map((title) => (
-                <option
-                  aria-label="title suggestions"
-                  key={title}
-                  value={title}
-                />
+              {autocomplete.map(({ id, title }) => (
+                <option aria-label="title suggestions" key={id} value={title} />
               ))}
             </datalist>
             <select

@@ -20,7 +20,7 @@ const fetchBooksByCategory = (category) => {
 const searchBooksByTitle = (title) => {
   const searchParams = new URLSearchParams({
     q: `intitle:${title}`,
-    fields: 'items(volumeInfo/title)',
+    fields: 'items(id,volumeInfo/title)',
   });
   return fetchBooks(searchParams);
 };
