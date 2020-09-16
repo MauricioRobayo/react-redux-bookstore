@@ -6,16 +6,6 @@ import { createBook } from '../redux/actions';
 import bookCategories from '../config';
 import { searchBooksByTitle } from '../api/googleBooksAPI';
 
-// function debounce(func, delay) {
-//   let timeout = null;
-//   return function _(...args) {
-//     clearTimeout(timeout)
-//     timeout = setTimeout(() => {func.apply(this, args)}, delay)
-//   }
-// }
-
-// const debouncedSearchBooksByTitle = debounce(searchBooksByTitle, 250)
-
 class BooksForm extends Component {
   constructor(props) {
     super(props);
