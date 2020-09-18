@@ -38,17 +38,20 @@ class BooksForm extends Component {
     });
   };
 
-  handleInputChange = (event) => {
+  handleOnKeyUp = (event) => {
+    if (event.key === undefined) {
+      return;
+    }
+
     const { value } = event.target;
     this.debouncedAutocomplete(value);
-    this.setState({
-      title: value,
-    });
   };
 
-  handleCategoryChange = (event) => {
+  handleOnChange = (event) => {
+    const { name, value } = event.target;
     this.setState({
-      category: event.target.value,
+      [name]: value,
+      suggestions: [],
     });
   };
 
@@ -93,8 +96,10 @@ class BooksForm extends Component {
               id="title"
               placeholder="Book title"
               value={title}
-              onChange={this.handleInputChange}
+              onChange={this.handleOnChange}
+              onKeyUp={this.handleOnKeyUp}
               aria-label="title"
+              name="title"
             />
             <datalist id="titles">
               {suggestions.map(({ id, title }) => (
@@ -106,7 +111,7 @@ class BooksForm extends Component {
               aria-label="category"
               id="category"
               value={category}
-              onChange={this.handleCategoryChange}
+              onChange={this.handleOnChange}
               className={category === 'Category' ? 'inactive' : ''}
             >
               {this.renderCategories()}
