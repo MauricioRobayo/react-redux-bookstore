@@ -39,10 +39,6 @@ class BooksForm extends Component {
   };
 
   handleOnKeyUp = (event) => {
-    if (event.key === undefined) {
-      return;
-    }
-
     const { value } = event.target;
     this.debouncedAutocomplete(value);
   };
