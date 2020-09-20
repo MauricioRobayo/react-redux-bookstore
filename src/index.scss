@@ -49,7 +49,7 @@ header {
 }
 nav,
 .BookList,
-.form {
+footer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
@@ -61,12 +61,11 @@ input {
   border: 1px solid var(--border-color);
   margin-bottom: 0.5rem;
 }
-.form {
+footer {
   padding: 0 1rem;
   form {
-    border-bottom: 2px solid var(--border-color);
-    padding: 0 0 2rem;
-    margin: 2rem auto 1rem;
+    border-top: 2px solid var(--border-color);
+    margin: 0.5rem auto 2rem auto;
     h4 {
       color: var(--color-light);
       text-transform: uppercase;
