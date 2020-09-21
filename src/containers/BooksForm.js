@@ -12,6 +12,7 @@ class BooksForm extends Component {
     this.state = {
       title: '',
       category: bookCategories[0],
+      id: '',
       suggestions: [],
     };
     this.debouncedAutocomplete = this.debounce(this.autocomplete, 250);
@@ -48,18 +49,20 @@ class BooksForm extends Component {
 
   handleOnChange = (event) => {
     const { name, value } = event.target;
+    const option = document.querySelector(`option[value="${value}"]`);
     this.setState({
       [name]: value,
       suggestions: [],
+      id: option?.dataset.id || uniqid(),
     });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { title, category } = this.state;
+    const { title, category, id } = this.state;
     const { createBook } = this.props;
     createBook({
-      id: uniqid(),
+      id,
       title,
       category,
     });
@@ -97,7 +100,12 @@ class BooksForm extends Component {
             />
             <datalist id="titles">
               {suggestions.map(({ id, title }) => (
-                <option aria-label="title suggestions" key={id} value={title} />
+                <option
+                  aria-label="title suggestions"
+                  key={id}
+                  data-id={id}
+                  value={title}
+                />
               ))}
             </datalist>
             <select
