@@ -30,10 +30,13 @@ class BooksForm extends Component {
   autocomplete = (value) => {
     searchBooksByTitle(value).then((books) => {
       this.setState({
-        suggestions: books.items.map((item) => ({
-          id: item.id,
-          title: item.volumeInfo.title,
-        })),
+        suggestions:
+          books.totalItems > 0
+            ? books.items.map((item) => ({
+                id: item.id,
+                title: item.volumeInfo.title,
+              }))
+            : [],
       });
     });
   };
