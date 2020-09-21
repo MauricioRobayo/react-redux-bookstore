@@ -25,4 +25,11 @@ const searchBooksByTitle = (title) => {
   return fetchBooks({ searchParams });
 };
 
-export { fetchBooksByCategory, searchBooksByTitle };
+const getBookById = (id) => {
+  const searchParams = new URLSearchParams({
+    fields: 'id,volumeInfo(title,imageLinks/smallThumbnail)',
+  });
+  return fetchBooks({ endpoint: `${id}`, searchParams });
+};
+
+export { fetchBooksByCategory, searchBooksByTitle, getBookById };
