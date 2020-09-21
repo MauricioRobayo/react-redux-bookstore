@@ -79,10 +79,6 @@ input {
       flex-grow: 1;
       background-color: white;
     }
-    select.inactive,
-    input::placeholder {
-      color: var(--color-lighter);
-    }
     > div {
       display: flex;
       flex-direction: column;
