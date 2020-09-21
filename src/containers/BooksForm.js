@@ -68,6 +68,7 @@ class BooksForm extends Component {
       createBook({
         id: book.id,
         title: book.volumeInfo.title,
+        thumbnail: book.volumeInfo.imageLinks.smallThumbnail,
         category,
       });
     } else {
