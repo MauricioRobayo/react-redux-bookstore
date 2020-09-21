@@ -14,6 +14,7 @@ class BooksForm extends Component {
       category: bookCategories[0],
       id: '',
       suggestions: [],
+      suggestionsCache: new Map(),
     };
     this.debouncedAutocomplete = this.debounce(this.autocomplete, 250);
   }
@@ -30,20 +31,33 @@ class BooksForm extends Component {
 
   autocomplete = (value) => {
     searchBooksByTitle(value).then((books) => {
-      this.setState({
-        suggestions:
-          books.totalItems > 0
-            ? books.items.map((item) => ({
-                id: item.id,
-                title: item.volumeInfo.title,
-              }))
-            : [],
+      const bookSuggestions =
+        books.totalItems > 0
+          ? books.items.map((item) => ({
+              id: item.id,
+              title: item.volumeInfo.title,
+            }))
+          : [];
+      this.setState(({ suggestionsCache }) => {
+        return {
+          suggestions: bookSuggestions,
+          suggestionsCache: suggestionsCache.set(value.trim(), bookSuggestions),
+        };
       });
     });
   };
 
   handleOnKeyUp = (event) => {
+    const { suggestionsCache } = this.state;
     const { value } = event.target;
+
+    if (suggestionsCache.has(value.trim())) {
+      this.setState({
+        suggestions: suggestionsCache.get(value.trim()),
+      });
+      return;
+    }
+
     this.debouncedAutocomplete(value);
   };
 
