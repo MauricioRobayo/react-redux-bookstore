@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 import { connect } from 'react-redux';
 import { createBook } from '../redux/actions';
 import bookCategories from '../config';
-import { searchBooksByTitle } from '../api/googleBooksAPI';
+import { searchBooksByTitle, getBookById } from '../api/googleBooksAPI';
 
 class BooksForm extends Component {
   constructor(props) {
@@ -53,22 +53,33 @@ class BooksForm extends Component {
     this.setState({
       [name]: value,
       suggestions: [],
-      id: option?.dataset.id || uniqid(),
+      id: option?.dataset.id || '',
     });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
+    event.persist();
+
     const { title, category, id } = this.state;
     const { createBook } = this.props;
-    createBook({
-      id,
-      title,
-      category,
-    });
+    if (id !== '') {
+      const book = await getBookById(id);
+      createBook({
+        id: book.id,
+        title: book.volumeInfo.title,
+        category,
+      });
+    } else {
+      createBook({
+        id: uniqid(),
+        title,
+        category,
+      });
+    }
     this.setState({
       title: '',
-      category: 'Categories',
+      category,
     });
     event.target.reset();
   };
