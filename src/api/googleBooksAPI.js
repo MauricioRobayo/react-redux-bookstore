@@ -1,6 +1,6 @@
-const fetchBooks = async (searchparams) => {
+const fetchBooks = async (searchParams) => {
   const response = await fetch(
-    `https://www.googleapis.com/books/v1/volumes?${searchparams}`
+    `https://www.googleapis.com/books/v1/volumes?${searchParams}`
   );
   if (!response.ok) {
     throw new Error(`Something went wrong ${response.statusText}`);
