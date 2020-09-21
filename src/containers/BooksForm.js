@@ -4,6 +4,7 @@ import uniqid from 'uniqid';
 import { connect } from 'react-redux';
 import { createBook } from '../redux/actions';
 import bookCategories from '../config';
+import { searchBooksByTitle } from '../api/googleBooksAPI';
 
 class BooksForm extends Component {
   constructor(props) {
@@ -11,13 +12,42 @@ class BooksForm extends Component {
     this.state = {
       title: '',
       category: 'Category',
+      suggestions: [],
     };
+    this.debouncedAutocomplete = this.debounce(this.autocomplete, 250);
   }
 
-  handleChange = (event) => {
+  debounce = (func, delay) => {
+    let timeout = null;
+    return function _(...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  };
+
+  autocomplete = (value) => {
+    searchBooksByTitle(value).then((books) => {
+      this.setState({
+        suggestions: books.items.map((item) => ({
+          id: item.id,
+          title: item.volumeInfo.title,
+        })),
+      });
+    });
+  };
+
+  handleOnKeyUp = (event) => {
+    const { value } = event.target;
+    this.debouncedAutocomplete(value);
+  };
+
+  handleOnChange = (event) => {
     const { name, value } = event.target;
     this.setState({
       [name]: value,
+      suggestions: [],
     });
   };
 
@@ -50,25 +80,34 @@ class BooksForm extends Component {
     ));
 
   render() {
-    const { title, category } = this.state;
+    const { title, category, suggestions } = this.state;
     return (
-      <footer>
+      <div className="form">
         <form onSubmit={this.handleSubmit}>
           <h4>Add new book</h4>
           <div>
             <input
+              list="titles"
               type="text"
-              name="title"
               id="title"
               placeholder="Book title"
               value={title}
-              onChange={this.handleChange}
+              onChange={this.handleOnChange}
+              onKeyUp={this.handleOnKeyUp}
+              aria-label="title"
+              name="title"
             />
+            <datalist id="titles">
+              {suggestions.map(({ id, title }) => (
+                <option aria-label="title suggestions" key={id} value={title} />
+              ))}
+            </datalist>
             <select
               name="category"
+              aria-label="category"
               id="category"
               value={category}
-              onChange={this.handleChange}
+              onChange={this.handleOnChange}
               className={category === 'Category' ? 'inactive' : ''}
             >
               {this.renderCategories()}
@@ -78,7 +117,7 @@ class BooksForm extends Component {
             </button>
           </div>
         </form>
-      </footer>
+      </div>
     );
   }
 }
