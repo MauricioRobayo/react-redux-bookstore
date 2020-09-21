@@ -11,7 +11,7 @@ class BooksForm extends Component {
     super(props);
     this.state = {
       title: '',
-      category: 'Category',
+      category: bookCategories[0],
       suggestions: [],
     };
     this.debouncedAutocomplete = this.debounce(this.autocomplete, 250);
@@ -71,13 +71,8 @@ class BooksForm extends Component {
   };
 
   renderCategories = () =>
-    ['Category', ...bookCategories].map((category) => (
-      <option
-        disabled={category === 'Category'}
-        hidden={category === 'Category'}
-        key={category}
-        value={category}
-      >
+    bookCategories.map((category) => (
+      <option key={category} value={category}>
         {category}
       </option>
     ));
@@ -111,7 +106,6 @@ class BooksForm extends Component {
               id="category"
               value={category}
               onChange={this.handleOnChange}
-              className={category === 'Category' ? 'inactive' : ''}
             >
               {this.renderCategories()}
             </select>
