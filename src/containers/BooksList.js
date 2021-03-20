@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Book from '../components/Book';
-import { removeBook, getRandomBooks } from '../redux/actions';
 import bookCategories from '../config';
+import { getRandomBooks, removeBook } from '../redux/actions';
 
 class BooksList extends Component {
   componentDidMount() {
@@ -17,23 +17,34 @@ class BooksList extends Component {
   };
 
   render() {
-    const { books, filter } = this.props;
+    const {
+      books: { data, status },
+      filter,
+    } = this.props;
+
+    const booksList =
+      data.length > 1 ? (
+        data
+          .filter((book) => filter === book.category || filter === 'All')
+          .reverse()
+          .map((book) => (
+            <Book
+              key={book.id}
+              book={book}
+              handleRemoveBook={this.handleRemoveBook}
+            />
+          ))
+      ) : (
+        <div>No books :(</div>
+      );
+
     return (
       <>
         <div className="BookList">
-          {books.length === 0 ? (
+          {status === 'pending' || status === 'idle' ? (
             <div>Loading...</div>
           ) : (
-            books
-              .filter((book) => filter === book.category || filter === 'All')
-              .reverse()
-              .map((book) => (
-                <Book
-                  key={book.id}
-                  book={book}
-                  handleRemoveBook={this.handleRemoveBook}
-                />
-              ))
+            booksList
           )}
         </div>
       </>
@@ -42,13 +53,16 @@ class BooksList extends Component {
 }
 
 BooksList.propTypes = {
-  books: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      title: PropTypes.string,
-      category: PropTypes.string,
-    })
-  ).isRequired,
+  books: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        title: PropTypes.string,
+        category: PropTypes.string,
+      })
+    ).isRequired,
+    status: PropTypes.string.isRequired,
+  }).isRequired,
   filter: PropTypes.string.isRequired,
   removeBook: PropTypes.func.isRequired,
   getRandomBooks: PropTypes.func.isRequired,

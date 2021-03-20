@@ -5,6 +5,7 @@ const actionTypes = {
   REMOVE_BOOK: 'REMOVE_BOOK',
   CHANGE_FILTER: 'CHANGE_FILTER',
   LOAD_BOOKS: 'LOAD_BOOKS',
+  SET_BOOKS_STATUS: 'SET_BOOKS_STATUS',
 };
 
 const createBook = (book) => ({
@@ -20,6 +21,11 @@ const removeBook = (book) => ({
 const changeFilter = (filter) => ({
   type: actionTypes.CHANGE_FILTER,
   filter,
+});
+
+const setBookStatus = (status) => ({
+  type: actionTypes.SET_BOOKS_STATUS,
+  status,
 });
 
 const getRandomBooks = (categories) => {
@@ -56,6 +62,7 @@ const getRandomBooks = (categories) => {
   }
 
   return (dispatch) => {
+    dispatch(setBookStatus('idle'));
     Promise.all(categories.map(fetchBooksByCategory)).then(
       (booksByCategory) => {
         dispatch({
@@ -72,6 +79,7 @@ const getRandomBooks = (categories) => {
             })
             .flat(),
         });
+        dispatch(setBookStatus('resolved'));
       }
     );
   };

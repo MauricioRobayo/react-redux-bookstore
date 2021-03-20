@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import books from './book';
+import books from './books';
 import filter from './filter';
 
 const reducers = combineReducers({
